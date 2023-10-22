@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://df0r7j6lamh84"]
+
+[ext_resource type="Script" path="res://scripts/Player.gd" id="1_617yt"]
+[ext_resource type="PackedScene" uid="uid://35cxq1mcixf0" path="res://player/bomb.tscn" id="2_2oxam"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_jtv4y"]
+radius = 0.9
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_n8boe"]
+top_radius = 0.9
+bottom_radius = 0.9
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_jiyr3"]
+radius = 1.05
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_617yt")
+bomb = ExtResource("2_2oxam")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_jtv4y")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CylinderMesh_n8boe")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("CylinderShape3D_jiyr3")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+target_position = Vector3(5, 0, 0)
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
