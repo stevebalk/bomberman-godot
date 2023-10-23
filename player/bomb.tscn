@@ -122,4 +122,7 @@ libraries = {
 "": SubResource("AnimationLibrary_1b5sq")
 }
 
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(2, 0, 0)
+
 [connection signal="animation_finished" from="Bomb/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

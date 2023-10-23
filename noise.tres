@@ -1,0 +1,9 @@
+[gd_resource type="NoiseTexture2D" load_steps=2 format=3 uid="uid://d0kv4yo4v18dt"]
+
+[sub_resource type="Gradient" id="Gradient_vgvor"]
+offsets = PackedFloat32Array(0.449367, 0.740506)
+colors = PackedColorArray(0.0470588, 0.27451, 0, 1, 0.057, 0.57, 0, 1)
+
+[resource]
+color_ramp = SubResource("Gradient_vgvor")
+noise = null

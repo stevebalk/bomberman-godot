@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://de64op4s7rgrq"]
+[gd_scene load_steps=18 format=3 uid="uid://de64op4s7rgrq"]
 
 [ext_resource type="Script" path="res://scripts/GameLogic.gd" id="1_gkf6d"]
 [ext_resource type="PackedScene" uid="uid://df0r7j6lamh84" path="res://player/player.tscn" id="2_3ls6d"]
@@ -9,6 +9,7 @@
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_s3obl"]
 sky_top_color = Color(1, 1, 1, 1)
 sky_horizon_color = Color(1, 1, 1, 1)
+sky_energy_multiplier = 0.15
 ground_bottom_color = Color(0, 0, 0, 1)
 ground_horizon_color = Color(0, 0, 0, 1)
 
@@ -18,13 +19,35 @@ sky_material = SubResource("ProceduralSkyMaterial_s3obl")
 [sub_resource type="Environment" id="Environment_4tf71"]
 background_mode = 2
 sky = SubResource("Sky_fpiob")
-sky_custom_fov = 14.9
+sky_custom_fov = 14.0
 tonemap_mode = 2
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.0
 
+[sub_resource type="Gradient" id="Gradient_vgvor"]
+offsets = PackedFloat32Array(0.449367, 0.670886)
+colors = PackedColorArray(0.0470588, 0.27451, 0, 1, 0.057, 0.57, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_kcqry"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vhpn3"]
+color_ramp = SubResource("Gradient_vgvor")
+noise = SubResource("FastNoiseLite_kcqry")
+
+[sub_resource type="Gradient" id="Gradient_gub21"]
+offsets = PackedFloat32Array(0.373418, 0.696203)
+colors = PackedColorArray(1, 1, 1, 1, 0.0733945, 0.0733945, 0.0733945, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_51dam"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6s0e1"]
+color_ramp = SubResource("Gradient_gub21")
+noise = SubResource("FastNoiseLite_51dam")
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vc4xr"]
-albedo_color = Color(0, 0.113725, 0.290196, 1)
+albedo_texture = SubResource("NoiseTexture2D_vhpn3")
+roughness = 0.76
+roughness_texture = SubResource("NoiseTexture2D_6s0e1")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_lct1v"]
 material = SubResource("StandardMaterial3D_vc4xr")
