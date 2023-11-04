@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cng21brik8hpp"]
+
+[ext_resource type="MeshLibrary" uid="uid://kedhydqyyquf" path="res://meshLibs/DestructableObjects.tres" id="1_e3che"]
+
+[node name="Destructibles" type="GridMap" groups=["destructible"]]
+mesh_library = ExtResource("1_e3che")
+cell_center_x = false
+cell_center_z = false
+collision_layer = 5
+collision_mask = 0

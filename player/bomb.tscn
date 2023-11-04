@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dhdtlo7x5wipj" path="res://player/explosion.tscn" id="2_ten1q"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_halnd"]
+radius = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4k0nw"]
 albedo_color = Color(0.317647, 0, 1, 1)
@@ -122,7 +123,16 @@ libraries = {
 "": SubResource("AnimationLibrary_1b5sq")
 }
 
-[node name="RayCast3D" type="RayCast3D" parent="."]
+[node name="RayCastN" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -2)
+
+[node name="RayCastE" type="RayCast3D" parent="."]
 target_position = Vector3(2, 0, 0)
+
+[node name="RayCastS" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, 2)
+
+[node name="RayCastW" type="RayCast3D" parent="."]
+target_position = Vector3(-2, 0, 0)
 
 [connection signal="animation_finished" from="Bomb/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
