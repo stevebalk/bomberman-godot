@@ -102,22 +102,22 @@ explosion = ExtResource("2_ten1q")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_halnd")
 
-[node name="Bomb" type="Node3D" parent="."]
+[node name="Pivot" type="Node3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -1, 0)
 
-[node name="Body" type="MeshInstance3D" parent="Bomb"]
+[node name="Body" type="MeshInstance3D" parent="Pivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("SphereMesh_cw4n6")
 
-[node name="Loch" type="MeshInstance3D" parent="Bomb"]
+[node name="Loch" type="MeshInstance3D" parent="Pivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CylinderMesh_e4gwi")
 
-[node name="Lunte" type="MeshInstance3D" parent="Bomb"]
+[node name="Lunte" type="MeshInstance3D" parent="Pivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000660837, 1.09487, -0.00512779)
 mesh = SubResource("CylinderMesh_tew4j")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Bomb"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Pivot"]
 autoplay = "arming"
 libraries = {
 "": SubResource("AnimationLibrary_1b5sq")
@@ -135,4 +135,4 @@ target_position = Vector3(0, 0, 2)
 [node name="RayCastW" type="RayCast3D" parent="."]
 target_position = Vector3(-2, 0, 0)
 
-[connection signal="animation_finished" from="Bomb/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="animation_finished" from="Pivot/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
