@@ -3,7 +3,10 @@ var explosion_size := 1
 @export var explosion : PackedScene
 @export var roll_speed := 1000.0
 @onready var walls = get_parent().indestructible_walls
-@onready var raycast_x := $RayCast3D
+@onready var raycastN := $RayCastN
+@onready var raycastE := $RayCastE
+@onready var raycastS := $RayCastS
+@onready var raycastW := $RayCastW
 var offset = 1
 var grid_size := 2
 var used_cells
@@ -12,7 +15,7 @@ var vel := Vector3.ZERO
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_place_on_grid()
-	raycast_x.target_position.x = explosion_size * grid_size
+	set_raycast_length()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -38,6 +41,12 @@ func _place_on_grid() -> void:
 	else:
 		position.z = (position.z - diff_to_grid.y * _sign.z) + (grid_size * _sign.z)
 	position.y = 0
+
+func set_raycast_length() -> void:
+	raycastN.target_position.z = explosion_size * grid_size
+	raycastE.target_position.x = explosion_size * grid_size
+	raycastS.target_position.z = -explosion_size * grid_size
+	raycastW.target_position.x = -explosion_size * grid_size
 
 func spawn_explosion(direction: Vector3, length: int, offset: int) -> void:
 	var new_position: Vector3i
