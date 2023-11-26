@@ -46,6 +46,7 @@ shadow_mesh = SubResource("ArrayMesh_hhqim")
 size = Vector3(2, 2, 2)
 
 [node name="BrickWall" type="StaticBody3D"]
+collision_mask = 0
 
 [node name="Cube" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_ofjo4")

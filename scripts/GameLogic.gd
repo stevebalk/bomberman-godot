@@ -4,7 +4,7 @@ extends Node3D
 @onready var indestructible_walls = get_node("IndestructableObjects")
 
 @onready var indestructible_cells = get_node("IndestructableObjects").get_used_cells()
-@onready var destructable_cells = get_node("DestructableObjects").get_used_cells()
+#@onready var destructable_cells = get_node("DestructableObjects").get_used_cells()
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.

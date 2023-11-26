@@ -125,14 +125,18 @@ libraries = {
 
 [node name="RayCastN" type="RayCast3D" parent="."]
 target_position = Vector3(0, 0, -2)
+collision_mask = 4
 
 [node name="RayCastE" type="RayCast3D" parent="."]
 target_position = Vector3(2, 0, 0)
+collision_mask = 4
 
 [node name="RayCastS" type="RayCast3D" parent="."]
 target_position = Vector3(0, 0, 2)
+collision_mask = 4
 
 [node name="RayCastW" type="RayCast3D" parent="."]
 target_position = Vector3(-2, 0, 0)
+collision_mask = 4
 
 [connection signal="animation_finished" from="Pivot/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

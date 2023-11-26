@@ -48,29 +48,45 @@ func set_raycast_length() -> void:
 	raycastS.target_position.z = -explosion_size * grid_size
 	raycastW.target_position.x = -explosion_size * grid_size
 
-func spawn_explosion(direction: Vector3, length: int, offset: int) -> void:
-	var new_position: Vector3i
-	var child: Node
-	used_cells = get_parent()
-	for i in length:
-		new_position = position + (direction * grid_size) * (i + offset)
-		used_cells = get_parent().get_used_cells()
-		print("NEW POSITION = " + str(new_position / 2))
-		if new_position / grid_size in used_cells:
-			print(walls.get_mesh_library().get_item_name(walls.get_cell_item(new_position / grid_size)))
-			walls.set_cell_item(new_position / grid_size, -1)
-			break
-		child = explosion.instantiate()
-		child.position = new_position
-		get_parent().add_child(child)
+#func spawn_explosion(direction: Vector3, length: int, offset: int) -> void:
+#	var new_position: Vector3i
+#	var child: Node
+#	used_cells = get_parent()
+#	for i in length:
+#		new_position = position + (direction * grid_size) * (i + offset)
+#		used_cells = get_parent().get_used_cells()
+#		if new_position / grid_size in used_cells:
+#			print(walls.get_mesh_library().get_item_name(walls.get_cell_item(new_position / grid_size)))
+#			walls.set_cell_item(new_position / grid_size, -1)
+#			break
+#		child = explosion.instantiate()
+#		child.position = new_position
+#		get_parent().add_child(child)
 
+func spawn_explosion(_raycast: RayCast3D) -> void:
+	if _raycast == null:
+		return
+	var collider = _raycast.get_collider()
+	if collider and collider.is_in_group("destructible"):
+		print("BOOM")
+		collider.get_owner().queue_free()
+
+
+#func spawn_explosions() -> void:
+##	print(used_cells)
+#	spawn_explosion(Vector3.ZERO, 1, 0)
+#	spawn_explosion(Vector3.RIGHT, explosion_size, 1)
+#	spawn_explosion(Vector3.LEFT, explosion_size, 1)
+#	spawn_explosion(Vector3.FORWARD, explosion_size, 1)
+#	spawn_explosion(Vector3.BACK, explosion_size, 1)
+	
 func spawn_explosions() -> void:
 #	print(used_cells)
-	spawn_explosion(Vector3.ZERO, 1, 0)
-	spawn_explosion(Vector3.RIGHT, explosion_size, 1)
-	spawn_explosion(Vector3.LEFT, explosion_size, 1)
-	spawn_explosion(Vector3.FORWARD, explosion_size, 1)
-	spawn_explosion(Vector3.BACK, explosion_size, 1)
+	spawn_explosion(null)
+	spawn_explosion(raycastN)
+	spawn_explosion(raycastE)
+	spawn_explosion(raycastS)
+	spawn_explosion(raycastW)
 
 func _on_animation_player_animation_finished(anim_name):
 	spawn_explosions()
